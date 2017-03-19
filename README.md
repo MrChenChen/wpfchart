@@ -1,5 +1,7 @@
 # WPFCanvasChart
 
+Fork from https://github.com/igorcrevar/WPFCanvasChart
+
 ### Customizable WPF charting for large number of elements
 There are controls for: Line series charts, Bar charts, Stacked bar charts, etc. 
 You can also use WPFCanvasChartComponent class directly(look at WPFCanvasChartTest example). The class will do for you things like axis drawing, point translation, zooming, scrolling, etc... Actual chart content is drawn by user.
