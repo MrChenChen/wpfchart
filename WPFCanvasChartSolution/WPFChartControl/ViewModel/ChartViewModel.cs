@@ -7,7 +7,7 @@ using IgorCrevar.WPFChartControl.Drawer;
 
 namespace IgorCrevar.WPFChartControl.ViewModel
 {
-    class ChartViewModel : INotifyPropertyChanged
+    class  ChartViewModel : INotifyPropertyChanged
     {
         private string tTitle = string.Empty;
         private string xAxisText = string.Empty;

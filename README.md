@@ -16,33 +16,63 @@ xmlns:chart="clr-namespace:IgorCrevar.WPFChartControl;assembly=WPFChartControl"
 ```
 In ViewModel you can do something like:
 ``` c#
-YourCustomDrawer = new LineSeriesChartDrawer(new List<Point> { new Point(10, 20), new Point(20, 40) });
-```
-or
-``` c#
-YourCustomDrawer = new StackedBarChartDrawer(new List<StackedBarItem>
+private AbstractChartDrawer lineSeriesChartDrawer;
+
+public AbstractChartDrawer LineSeriesChartDrawer
 {
-   new StackedBarItem(0, new double[] { 50, 30, 20 }),
-   new StackedBarItem(1, new double[] { 100, 0, 100 }),
-})
+     get
+     {
+         return lineSeriesChartDrawer;
+     }
+
+     set
+     {
+         if (lineSeriesChartDrawer != value)
+         {
+               lineSeriesChartDrawer = value;
+               OnPropertyChanged("LineSeriesChartDrawer");
+         }
+    }
+}
+
+
+var rnd = new Random();
+
+var serie1 = new List<Point>();
+var serie2 = new List<Point>();
+var item1 = new LegendItem();
+item1.DotRadius = 2;
+item1.IsDotEnable = true;
+item1.DotBrush = Brushes.Transparent;
+item1.DotPen = new Pen(Brushes.Red, 1);
+item1.Name = "Red";
+item1.LinePen = new Pen(Brushes.Red, 1);
+
+var item2 = new LegendItem();
+item2.Name = "Blue";
+item2.LinePen = new Pen(Brushes.Blue, 0);
+
+for (int i = 0; i < 50; ++i)
 {
-	Legend = new LegendItem[]
-	{
-		new LegendItem(Colors.Blue, "One"),
-		new LegendItem(Colors.Red, "Two"),
-		new LegendItem(Colors.Yellow, "Total"),
-	},
-	LegendWidth = 120.0d,
-};
-```
-or
-``` c#
-BarChartDrawer = new BarChartDrawer(new Point[]{
-	new Point(1.0d, rnd.Next(100)),
-	new Point(2.0d, rnd.Next(100)),
-	new Point(3.0d, rnd.Next(100)),
-	new Point(4.0d, rnd.Next(100)),
+    serie1.Add(new Point(i, rnd.NextDouble() * 200 - 100));
+    serie2.Add(new Point(i + 1, rnd.NextDouble() * 200 - 100));
+}
+
+LineSeriesChartDrawer = new LineSeriesChartDrawer(new List<IList<Point>>{
+    serie1, serie2
 });
+
+(LineSeriesChartDrawer as LineSeriesChartDrawer).Title = "12345";
+
+lineSeriesChartDrawer.Legend = new List<LegendItem>();
+lineSeriesChartDrawer.ShowLegendIten = true;
+lineSeriesChartDrawer.Legend.Add(item1);
+lineSeriesChartDrawer.Legend.Add(item2);
+
+
+var setting = lineSeriesChartDrawer.Settings = new WPFCanvasChartSettings();
+setting.FontSize = 12;
+setting.ZoomXYAtSameTime = true;
 ```
 etc
 Check example for more options for every drawer...

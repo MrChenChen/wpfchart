@@ -97,8 +97,8 @@ namespace IgorCrevar.WPFChartControl
             {
                 if (viewModel.PostionVisibility == Visibility.Visible)
                 {
-                    viewModel.PosX = "X: " + x.ToString("####.00;-###.00;0");
-                    viewModel.PosY = "Y: " + y.ToString("####.00;-###.00;0");
+                    viewModel.PosX = "X: " + string.Format("{0:0.00;- 0.00;0}", x);
+                    viewModel.PosY = "Y: " + string.Format("{0:0.00;- 0.00;0}", y);
                 }
             };
 
